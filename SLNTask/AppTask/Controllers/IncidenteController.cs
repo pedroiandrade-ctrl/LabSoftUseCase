@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AppTask.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
-namespace AppTask.Models
+namespace AppTask.Controllers
 {
     public class IncidenteController : Controller
     {
@@ -20,9 +21,9 @@ namespace AppTask.Models
         // GET: Incidente
         public async Task<IActionResult> Index()
         {
-              return _context.Incidentes != null ? 
-                          View(await _context.Incidentes.ToListAsync()) :
-                          Problem("Entity set 'DbTasksContext.Incidentes'  is null.");
+            return _context.Incidentes != null ?
+                        View(await _context.Incidentes.ToListAsync()) :
+                        Problem("Entity set 'DbTasksContext.Incidentes'  is null.");
         }
 
         // GET: Incidente/Details/5
@@ -148,14 +149,14 @@ namespace AppTask.Models
             {
                 _context.Incidentes.Remove(incidente);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool IncidenteExists(int id)
         {
-          return (_context.Incidentes?.Any(e => e.Codigo == id)).GetValueOrDefault();
+            return (_context.Incidentes?.Any(e => e.Codigo == id)).GetValueOrDefault();
         }
     }
 }
